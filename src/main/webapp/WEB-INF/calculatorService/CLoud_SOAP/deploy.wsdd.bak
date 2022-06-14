@@ -1,0 +1,42 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from calculatorService WSDL service -->
+
+  <service name="calculator" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://CLoud_SOAP"/>
+      <parameter name="wsdlServiceElement" value="calculatorService"/>
+      <parameter name="schemaQualified" value="http://CLoud_SOAP"/>
+      <parameter name="wsdlServicePort" value="calculator"/>
+      <parameter name="className" value="CLoud_SOAP.CalculatorSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="calculator"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="addition" qname="operNS:addition" xmlns:operNS="http://CLoud_SOAP" returnQName="retNS:additionReturn" xmlns:retNS="http://CLoud_SOAP" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in1" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="division" qname="operNS:division" xmlns:operNS="http://CLoud_SOAP" returnQName="retNS:divisionReturn" xmlns:retNS="http://CLoud_SOAP" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in1" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="subtraction" qname="operNS:subtraction" xmlns:operNS="http://CLoud_SOAP" returnQName="retNS:subtractionReturn" xmlns:retNS="http://CLoud_SOAP" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in1" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="multiplication" qname="operNS:multiplication" xmlns:operNS="http://CLoud_SOAP" returnQName="retNS:multiplicationReturn" xmlns:retNS="http://CLoud_SOAP" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:in0" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:in1" xmlns:pns="http://CLoud_SOAP" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="division subtraction multiplication addition"/>
+
+  </service>
+</deployment>

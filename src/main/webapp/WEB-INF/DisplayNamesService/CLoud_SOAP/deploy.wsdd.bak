@@ -1,0 +1,65 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from DisplayNamesService WSDL service -->
+
+  <service name="DisplayNames" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://CLoud_SOAP"/>
+      <parameter name="wsdlServiceElement" value="DisplayNamesService"/>
+      <parameter name="schemaQualified" value="http://CLoud_SOAP"/>
+      <parameter name="wsdlServicePort" value="DisplayNames"/>
+      <parameter name="className" value="CLoud_SOAP.DisplayNamesSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="DisplayNames"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getName" qname="operNS:getName" xmlns:operNS="http://CLoud_SOAP" returnQName="retNS:getNameReturn" xmlns:retNS="http://CLoud_SOAP" returnType="rtns:anyType" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="setName" qname="operNS:setName" xmlns:operNS="http://CLoud_SOAP" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://CLoud_SOAP" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAge" qname="operNS:getAge" xmlns:operNS="http://CLoud_SOAP" returnQName="retNS:getAgeReturn" xmlns:retNS="http://CLoud_SOAP" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="setName getAge getName"/>
+
+      <typeMapping
+        xmlns:ns="http://CLoud_SOAP"
+        qname="ns:>setNameResponse"
+        type="java:CLoud_SOAP.SetNameResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://CLoud_SOAP"
+        qname="ns:>getAgeResponse"
+        type="java:CLoud_SOAP.GetAgeResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://CLoud_SOAP"
+        qname="ns:>setName"
+        type="java:CLoud_SOAP.SetName"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://CLoud_SOAP"
+        qname="ns:>getAge"
+        type="java:CLoud_SOAP.GetAge"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
